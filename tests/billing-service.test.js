@@ -146,3 +146,35 @@ test('real gateway and durable coordinator preserve exact checkout parameters ac
   assert.equal(posts.length,2);assert.deepEqual(posts[0],posts[1]);
   assert.equal(f.sqlite.prepare('SELECT session_id FROM billing_checkouts').get().session_id,'cs_test_realcontract');
 });
+
+test('an ended subscription retires only its own completed checkout and allows a fresh attempt',async t=>{
+ for(const status of ['canceled','incomplete_expired']){
+  const f=setup(t);assert.equal((await f.send()).status,200);
+  const old=[...f.sessions.values()][0];old.status='complete';old.subscriptionId='sub_ended';
+  f.gateway.listSubscriptions=async customer=>[{id:'sub_ended',customer,livemode:false,status}];
+  assert.equal((await f.send()).status,200);
+  assert.equal(f.sessions.size,2);
+  const states=f.sqlite.prepare('SELECT state FROM billing_checkouts ORDER BY created_at,request_key').all().map(r=>r.state).sort();
+  assert.deepEqual(states,['open','retired']);
+  assert.equal((await f.send()).status,200);assert.equal(f.sessions.size,2);
+ }
+});
+
+test('unknown, foreign, live or still-running subscription states cannot authorize re-subscription',async t=>{
+ for(const change of [{status:'active'},{status:'trialing'},{status:'past_due'},{status:'unpaid'},
+  {status:'paused'},{status:'incomplete'},{customer:'cus_foreign'},{livemode:true},{id:'sub_unrelated'},null]){
+  const f=setup(t);await f.send();const old=[...f.sessions.values()][0];old.status='complete';old.subscriptionId='sub_previous';
+  f.gateway.listSubscriptions=async customer=>change===null?[]:[{id:'sub_previous',customer,livemode:false,status:'canceled',...change}];
+  const response=await f.send();assert.equal(response.status,409);assert.equal(f.sessions.size,1);
+  assert.equal(f.sqlite.prepare('SELECT state FROM billing_checkouts').get().state,'complete');
+ }
+});
+
+test('re-subscription still checks for any other active subscription before creating checkout',async t=>{
+ const f=setup(t);await f.send();const old=[...f.sessions.values()][0];old.status='complete';old.subscriptionId='sub_ended';
+ f.gateway.listSubscriptions=async customer=>[{id:'sub_ended',customer,livemode:false,status:'canceled'}];
+ f.gateway.prepareCheckout=async()=>{throw Error('Another active provider subscription exists');};
+ assert.equal((await f.send()).status,503);assert.equal(f.sessions.size,1);
+ assert.equal(f.sqlite.prepare('SELECT state FROM billing_checkouts').get().state,'retired');
+ assert.equal((await f.send()).status,503);assert.equal(f.sessions.size,1);
+});

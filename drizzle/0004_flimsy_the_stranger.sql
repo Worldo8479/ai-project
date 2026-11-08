@@ -1,0 +1,2 @@
+DROP INDEX `billing_active_checkout`;--> statement-breakpoint
+CREATE UNIQUE INDEX `billing_active_checkout` ON `billing_checkouts` (`account_reference`) WHERE "billing_checkouts"."state" NOT IN ('expired', 'retired');

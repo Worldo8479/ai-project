@@ -136,3 +136,15 @@ test('a configured portal must use the server-selected configuration',async()=>{
  const wrong=createStripeSandboxGateway({...config,portalConfigurationId:'bpc_fixed'},async()=>Response.json({customer:'cus_owner',livemode:false,configuration:'bpc_other',url:'https://billing.stripe.com/session'}));
  await assert.rejects(wrong.portal('cus_owner',key));
 });
+
+test('completed Checkout exposes only a valid linked subscription reference',async()=>{
+ const session={id:'cs_test_saved',customer:'cus_owner',livemode:false,mode:'subscription',status:'complete',expires_at:2000000000,url:null};
+ for(const subscription of ['sub_saved',{id:'sub_saved'}]){
+  const {gateway}=fixture([{...session,subscription}]);
+  assert.equal((await gateway.retrieveCheckout('cus_owner','cs_test_saved')).subscriptionId,'sub_saved');
+ }
+ const empty=fixture([{...session,subscription:null}]);assert.equal((await empty.gateway.retrieveCheckout('cus_owner','cs_test_saved')).subscriptionId,null);
+ for(const subscription of ['cus_foreign','sub_invalid/extra',{},42]){
+  const {gateway}=fixture([{...session,subscription}]);await assert.rejects(gateway.retrieveCheckout('cus_owner','cs_test_saved'));
+ }
+});

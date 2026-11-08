@@ -39,7 +39,7 @@ try{
  const gateway=createStripeSandboxGateway(config),service=createSandboxBillingService({db,gateway,scope:'verify-'+runId});
  await gateway.validatePrice();check(true,'Stripe validates the exact USD 29 monthly plan');
  const account=user=>sqlite.prepare('SELECT * FROM billing_accounts WHERE user_id=?').get(user);
- const attempt=user=>sqlite.prepare("SELECT c.* FROM billing_checkouts c JOIN billing_accounts a ON a.reference=c.account_reference WHERE a.user_id=? AND c.state!='expired'").get(user);
+ const attempt=user=>sqlite.prepare("SELECT c.* FROM billing_checkouts c JOIN billing_accounts a ON a.reference=c.account_reference WHERE a.user_id=? AND c.state NOT IN ('expired','retired')").get(user);
  stage='checkout isolation';
  const concurrent=await Promise.allSettled([service.checkout('fictional-alice'),service.checkout('fictional-alice')]);
  check(concurrent.filter(r=>r.status==='fulfilled').length===1&&concurrent.some(r=>r.status==='rejected'&&r.reason.status===409),'Concurrent checkout clicks create one local attempt');

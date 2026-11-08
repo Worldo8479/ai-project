@@ -1,6 +1,6 @@
 {
-  "runId": "a4224d5a-b56a-41ad-a7cf-53f6c698536d",
-  "startedAt": "2026-11-08T22:17:09.659Z",
+  "runId": "8a37ff3e-e930-48e4-b53f-1f482d1fa766",
+  "startedAt": "2026-11-08T22:37:34.579Z",
   "apiVersion": "2026-10-28.endive",
   "checks": [
     "Product is explicitly test mode",
@@ -20,5 +20,5 @@
   ],
   "cleanupErrors": 0,
   "passed": true,
-  "finishedAt": "2026-11-08T22:17:24.756Z"
+  "finishedAt": "2026-11-08T22:37:49.162Z"
 }

@@ -23,7 +23,7 @@ export const billingCheckouts = sqliteTable('billing_checkouts', {
  createdAt: integer('created_at').notNull(), sessionId: text('session_id').unique(),
  state: text('state').notNull().default('pending'), expiresAt: integer('expires_at'),
 }, table => [uniqueIndex('billing_active_checkout').on(table.accountReference)
- .where(sql`${table.state} != 'expired'`)]);
+ .where(sql`${table.state} NOT IN ('expired', 'retired')`)]);
 
 export const accountPreferences = sqliteTable('account_preferences', {
  userId: text('user_id').primaryKey(), currency: text('currency').notNull(),
