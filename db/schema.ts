@@ -30,3 +30,16 @@ export const accountPreferences = sqliteTable('account_preferences', {
  target: integer('target').notNull(), revision: text('revision').notNull(),
  updatedAt: text('updated_at').notNull(),
 });
+
+export const billingEvents = sqliteTable('billing_events', {
+ scope: text('scope').notNull(), eventId: text('event_id').notNull(),
+ customerId: text('customer_id').notNull(), payloadHash: text('payload_hash').notNull(),
+ eventType: text('event_type').notNull(), receivedAt: integer('received_at').notNull(),
+ processedAt: integer('processed_at'),
+}, table => [primaryKey({columns:[table.scope,table.eventId]})]);
+
+export const billingSubscriptionState = sqliteTable('billing_subscription_state', {
+ accountReference: text('account_reference').primaryKey().references(()=>billingAccounts.reference),
+ status: text('status').notNull(), subscriptionId: text('subscription_id'), validUntil: integer('valid_until'),
+ cancelsAtPeriodEnd: integer('cancels_at_period_end').notNull(), verifiedAt: integer('verified_at').notNull(),
+});

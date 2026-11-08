@@ -36,10 +36,20 @@ The first provider attempt on 8 November stopped at test-clock creation with HTT
 
 The owner has been asked to claim the environment using the private setup page already provided. Keep its claim link and keys out of this public repository. Do not rerun the blocked lifecycle simulation until the authorized key state changes. Earlier successful checkout API checks remain separate evidence.
 
+## Signed notification processing
+
+`lib/billing-webhooks.js` now implements an unmounted, test-only handler using official Stripe SDK 23.1.0 and WebCrypto. It verifies the original request bytes with a five-minute signature tolerance before database writes, limits bodies to 256 KiB, requires the configured snapshot API version and test-mode events, and refuses Connect/context events. No public delivery endpoint or signing secret has been configured.
+
+Supported Checkout, invoice and subscription notifications store a receipt keyed by sandbox and event ID. Raw payloads and personal details are not retained. A matching receipt detects repeat delivery; changed content under the same event ID is rejected. Unknown customer mappings, provider failures and busy account leases return retryable failures. Unrelated event types are acknowledged without affecting access.
+
+Reconciliation uses the account's existing checkout lease and fetches current subscriptions from Stripe instead of applying the event's potentially old snapshot. D1 writes the subscription snapshot and completed receipt in one transaction, with fencing against expired or superseded lease holders. The reader is scoped to the authenticated owner; unresolved notifications, expired periods and snapshots older than five minutes cannot grant access. A future access controller must refresh stale state through authenticated reconciliation; this reader alone is not production enforcement. Existing review access and exports are unchanged.
+
+Migration `0005_abnormal_khan.sql` adds receipts and subscription snapshots. Twelve signed-message/database tests cover signature failures, live/foreign events, size limits, two-account isolation, duplicates, out-of-order events, early delivery, retries, lease contention, stale writers and transaction rollback. `npm run test:billing-runtime` additionally bundles the handler for the local Workers runtime and uses actual local D1 transactions to check signature rejection, successful reconciliation, duplicate delivery and delayed cancellation. All four runtime checks passed on 8 November. Provider responses in these tests are fictional. Genuine Stripe delivery remains unverified, and purchases remain disabled.
+
 ## Required before enabling even sandbox purchases
 
 - Claim the temporary test environment, configure the application sandbox and stable scope, and complete the remaining provider acceptance tests.
-- Implement verified webhook processing using raw bodies and Stripe's SDK. Persist event IDs, reconcile current provider state, handle retries and out-of-order events, and never grant access from a success-page redirect.
+- Connect and verify the implemented notification processor with genuine Stripe delivery, including retry and delayed-event acceptance; the local fixture tests below are not provider-delivery evidence.
 - Configure a deliberate webhook delivery route. Owner-private hosting may block Stripe's unauthenticated server requests. Do not change the website audience or publish a separate endpoint without resolving this with the owner.
 - Add account billing controls and access enforcement. Preserve exports/read access when a subscription lapses. Decide and document grace periods, cancellations, refunds and retention.
 - Test genuine sandbox signup, duplicate clicks, renewals, failures, cancel/restore, delayed events and two-account isolation. Reconcile provider invoices/refunds/fees with a profit ledger.
