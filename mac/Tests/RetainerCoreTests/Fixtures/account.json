@@ -1,0 +1,45 @@
+{
+  "format": "retainerlens-account-v1",
+  "exportedAt": "2026-11-08T18:00:00.000Z",
+  "reviews": [
+    {
+      "month": "2026-11",
+      "currency": "USD",
+      "target": 50,
+      "rows": [
+        {
+          "client": "Northline Studio",
+          "fee": 3200,
+          "hours": 34,
+          "rate": 45,
+          "other": 80
+        },
+        {
+          "client": "Fieldwork Coffee",
+          "fee": 1800,
+          "hours": 36,
+          "rate": 45,
+          "other": 60
+        },
+        {
+          "client": "Common Ground",
+          "fee": 2600,
+          "hours": 22,
+          "rate": 45,
+          "other": 110
+        },
+        {
+          "client": "Good Things Co.",
+          "fee": 1400,
+          "hours": 19,
+          "rate": 45,
+          "other": 45
+        }
+      ],
+      "updatedAt": "2026-11-08T18:00:00.000Z",
+      "revision": "fictional-fixture-revision",
+      "deletedAt": null
+    }
+  ],
+  "trash": []
+}

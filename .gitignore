@@ -4,6 +4,12 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+
+# Native Mac build output and local documents
+mac/.build/
+mac/.swiftpm/
+*.retainerlens
+*.app/
 *.tar.gz
 
 # Dependencies

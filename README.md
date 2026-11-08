@@ -32,6 +32,8 @@ Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . T
 
 Required final scope: a full account-based web app and a Mac app sharing account data and subscription access. See `docs/roadmap.md` for delivery requirements.
 
+The `mac/` directory now contains a native SwiftUI document preview, shared-format archive handling, web calculation fixtures and eight native tests. It builds and launches, but shared account login/sync, billing access and desktop UI acceptance are not complete. See `mac/README.md` for build instructions and current limitations.
+
 See `docs/business.md` for research, economics and validation milestones; `docs/design.md` for the visual approach and QA evidence.
 
 ## Verification

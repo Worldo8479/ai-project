@@ -15,3 +15,17 @@ jobs:
       - run: npm run install:ci
       - run: npm test
       - run: npm run build
+  mac:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test native review model and compile app
+        working-directory: mac
+        run: swift test
+      - name: Build local Mac preview
+        run: bash scripts/build-mac.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RetainerLens-mac-preview
+          path: work/mac-release/*.zip
+          retention-days: 7

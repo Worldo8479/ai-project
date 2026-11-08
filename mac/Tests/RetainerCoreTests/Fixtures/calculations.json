@@ -1,0 +1,163 @@
+[
+  {
+    "row": {
+      "client": "Northline Studio",
+      "fee": 3200,
+      "hours": 34,
+      "rate": 45,
+      "other": 80
+    },
+    "target": 50,
+    "expected": {
+      "client": "Northline Studio",
+      "fee": 3200,
+      "hours": 34,
+      "rate": 45,
+      "other": 80,
+      "cost": 1610,
+      "profit": 1590,
+      "margin": 49.6875,
+      "targetFee": 3220,
+      "gap": 20,
+      "hourBudget": 33.77777777777778
+    }
+  },
+  {
+    "row": {
+      "client": "Fieldwork Coffee",
+      "fee": 1800,
+      "hours": 36,
+      "rate": 45,
+      "other": 60
+    },
+    "target": 50,
+    "expected": {
+      "client": "Fieldwork Coffee",
+      "fee": 1800,
+      "hours": 36,
+      "rate": 45,
+      "other": 60,
+      "cost": 1680,
+      "profit": 120,
+      "margin": 6.666666666666667,
+      "targetFee": 3360,
+      "gap": 1560,
+      "hourBudget": 18.666666666666668
+    }
+  },
+  {
+    "row": {
+      "client": "Common Ground",
+      "fee": 2600,
+      "hours": 22,
+      "rate": 45,
+      "other": 110
+    },
+    "target": 50,
+    "expected": {
+      "client": "Common Ground",
+      "fee": 2600,
+      "hours": 22,
+      "rate": 45,
+      "other": 110,
+      "cost": 1100,
+      "profit": 1500,
+      "margin": 57.692307692307686,
+      "targetFee": 2200,
+      "gap": 0,
+      "hourBudget": 26.444444444444443
+    }
+  },
+  {
+    "row": {
+      "client": "Good Things Co.",
+      "fee": 1400,
+      "hours": 19,
+      "rate": 45,
+      "other": 45
+    },
+    "target": 50,
+    "expected": {
+      "client": "Good Things Co.",
+      "fee": 1400,
+      "hours": 19,
+      "rate": 45,
+      "other": 45,
+      "cost": 900,
+      "profit": 500,
+      "margin": 35.714285714285715,
+      "targetFee": 1800,
+      "gap": 400,
+      "hourBudget": 14.555555555555555
+    }
+  },
+  {
+    "row": {
+      "client": "No revenue",
+      "fee": 0,
+      "hours": 2,
+      "rate": 40,
+      "other": 10
+    },
+    "target": 50,
+    "expected": {
+      "client": "No revenue",
+      "fee": 0,
+      "hours": 2,
+      "rate": 40,
+      "other": 10,
+      "cost": 90,
+      "profit": -90,
+      "margin": null,
+      "targetFee": 180,
+      "gap": 180,
+      "hourBudget": null
+    }
+  },
+  {
+    "row": {
+      "client": "Direct costs exceed budget",
+      "fee": 100,
+      "hours": 2,
+      "rate": 20,
+      "other": 90
+    },
+    "target": 50,
+    "expected": {
+      "client": "Direct costs exceed budget",
+      "fee": 100,
+      "hours": 2,
+      "rate": 20,
+      "other": 90,
+      "cost": 130,
+      "profit": -30,
+      "margin": -30,
+      "targetFee": 260,
+      "gap": 160,
+      "hourBudget": null
+    }
+  },
+  {
+    "row": {
+      "client": "No hourly cost",
+      "fee": 100,
+      "hours": 2,
+      "rate": 0,
+      "other": 10
+    },
+    "target": 35,
+    "expected": {
+      "client": "No hourly cost",
+      "fee": 100,
+      "hours": 2,
+      "rate": 0,
+      "other": 10,
+      "cost": 10,
+      "profit": 90,
+      "margin": 90,
+      "targetFee": 15.384615384615383,
+      "gap": 0,
+      "hourBudget": null
+    }
+  }
+]
