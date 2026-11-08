@@ -44,3 +44,5 @@ Advertising requires the user's approval of the channel, creative, destination a
 ## Current constraints
 
 The owner created the public project repository at https://github.com/Worldo8479/ai-project. Merchant account, business identity/contact, and customer outreach authorization are not supplied. These prevent commercial launch, not local product development.
+
+The private preview is deployed at https://retainerlens-studio.marco-anderson2011.chatgpt.site . On 8 November 2026 the owner explicitly requested keeping the website private; do not make it public without a later instruction.
