@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {validateReview,compareReviews} from '../lib/review.js';
+const review={month:'2026-11',currency:'USD',target:50,rows:[{client:'A',fee:2000,hours:20,rate:50,other:0}]};
+test('review validation strips user identifiers and other untrusted fields',()=>{assert.deepEqual(validateReview({...review,userId:'someone-else'}),review);});
+test('review rejects invalid dates, duplicates and non-numeric amounts',()=>{assert.throws(()=>validateReview({...review,month:'2026-13'}));assert.throws(()=>validateReview({...review,rows:[...review.rows,...review.rows]}));assert.throws(()=>validateReview({...review,rows:[{...review.rows[0],fee:'2000'}]}));});
+test('comparison uses weighted portfolio margin and refuses currency mixing',()=>{const next={...review,rows:[{...review.rows[0],fee:3000}]};assert.equal(compareReviews(next,review).profit,1000);assert.ok(Math.abs(compareReviews(next,review).margin-16.6666666667)<1e-6);assert.throws(()=>compareReviews({...review,currency:'GBP'},review));});

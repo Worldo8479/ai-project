@@ -4,22 +4,23 @@ A monthly retainer profitability review for small agencies. Working prelaunch pr
 
 ## Run
 
-Node.js 22 or later. No dependencies or install step.
+Node.js 22.13 or later. Install the locked framework dependencies first.
 
 ```sh
+npm run install:ci
 npm test
 npm run build
-npm start
+npm run dev
 ```
 
-Open http://127.0.0.1:4173. Deploy the `dist/` directory with any static host. `src/` is the canonical application source; the build copies it into `dist/`.
+Open the local URL printed by the dev server. This app now uses a Cloudflare Worker and D1 database; it cannot be deployed as static files alone. `src/` contains the visual interface, `app/api/` contains authenticated endpoints, and `db/` plus `drizzle/` own the database schema. The prebuild step synchronizes interface assets. Apply the generated SQL migration to the local preview database before testing persistence; Sites applies hosted migrations during publication.
 
 ## Working features
 
 - Editable clients, fees, delivered hours, hourly delivery costs, and other direct costs.
 - Delivery profit and weighted portfolio margin, user-selected target, and fee/hour planning scenarios.
 - CSV import with validation, CSV export with spreadsheet formula escaping.
-- Responsive layout and printable review. Data stays in the current browser tab; no analytics, accounts, uploads, or persistence.
+- Responsive layout and printable review. Optional sign-in, account-scoped saved monthly reviews, and comparisons. Unsaved edits stay in the current tab; saved records are stored in the database. No analytics.
 
 The illustrative client data is fictional. Currency selection changes labels, not values. Figures are delivery profit, not company net profit. Other costs, overhead, tax and customer acquisition must be considered separately. Export before closing the tab. CSV contains monthly client totals only; it does not preserve currency, target or month metadata.
 
@@ -27,7 +28,7 @@ The illustrative client data is fictional. Currency selection changes labels, no
 
 Canonical project repository: https://github.com/Worldo8479/ai-project (public). The owner created it for this project. All application source, tests, design notes, business plans and hosting configuration are maintained here. The hosting service uses a deployment mirror; GitHub remains the main project repository.
 
-Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . The owner requested keeping the site private. Saved monthly history, payment processing, customer acquisition and paid subscriptions are not live. No ad spend has been authorized. The $29/month plan is a pricing hypothesis, not an available purchase.
+Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . The owner requested keeping the site private. Account persistence has been implemented and locally verified; hosted verification is pending. Payment processing, customer acquisition and paid subscriptions are not live. No ad spend has been authorized. The $29/month plan is a pricing hypothesis, not an available purchase.
 
 Required final scope: a full account-based web app and a Mac app sharing account data and subscription access. See `docs/roadmap.md` for delivery requirements.
 
