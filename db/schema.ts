@@ -40,6 +40,6 @@ export const billingEvents = sqliteTable('billing_events', {
 
 export const billingSubscriptionState = sqliteTable('billing_subscription_state', {
  accountReference: text('account_reference').primaryKey().references(()=>billingAccounts.reference),
- status: text('status').notNull(), subscriptionId: text('subscription_id'), validUntil: integer('valid_until'),
+ priceId: text('price_id'), status: text('status').notNull(), subscriptionId: text('subscription_id'), validUntil: integer('valid_until'),
  cancelsAtPeriodEnd: integer('cancels_at_period_end').notNull(), verifiedAt: integer('verified_at').notNull(),
 });

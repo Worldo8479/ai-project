@@ -2,7 +2,7 @@
 
 ## Product and buyer
 
-RetainerLens helps the owner of a small design, web or marketing agency review monthly retainer delivery margins without replacing their time tracker. Initial scope is a useful review calculator, followed by saved monthly history and comparisons if buyers validate that need. Working name only; domain and trademark clearance have not been completed. No legal entity has been formed.
+RetainerLens helps the owner of a small design, web or marketing agency review monthly retainer delivery margins without replacing their time tracker. The private product now supports review calculations, saved monthly history and comparisons; willingness to pay for this workflow remains unvalidated. Working name only; domain and trademark clearance have not been completed. No legal entity has been formed.
 
 ## Evidence and uncertainty
 
@@ -18,7 +18,7 @@ Rejected as the first direction: generic invoice reminders. Crowded with bundled
 
 ## Required revenue model
 
-The user explicitly requires subscription-based profit. Paid access must use recurring subscriptions; no lifetime deals or one-off product sales will count toward the goal. The free preview supports acquisition. Subscription launch requires reliable saved monthly reviews, comparisons, transparent renewal terms, cancellation and billing management. $29/month per studio is the initial price hypothesis, subject to buyer validation.
+The user explicitly requires subscription-based profit. Paid access must use recurring subscriptions; no lifetime deals or one-off product sales will count toward the goal. The marketing website explains the product and shows software screenshots, without an interactive demo. The owner-private preview is free during development; no customer free tier has been promised. Subscription launch requires reliable saved monthly reviews, comparisons, transparent renewal terms, cancellation and billing management. $29/month per studio is the initial price hypothesis, subject to buyer validation.
 
 ## Pricing and profit target
 
@@ -36,7 +36,7 @@ Actual verified revenue: $0. Paying subscribers: 0. Ad spend: $0. Operating cost
 4. Run five observed product sessions. Track completion of a real review, input errors, and decisions users actually make. Do not count fictional examples as activation.
 5. Seek three explicit paid pilot commitments before expanding beyond the focused workflow. No fabricated waitlist or customer testimonials.
 6. Connect an owner-controlled merchant account and test checkout, refunds, subscription cancellation and fulfillment before accepting payments. Owner handles identity and bank verification.
-7. Deliver saved monthly history and comparison if the interviews support it; retain a usable free preview as an acquisition entry point.
+7. Use the implemented saved history and comparison in owner-approved pilot sessions; keep the marketing site informational, with account-based product access.
 8. Review actual revenue, costs, activation, paid conversion, retention and reasons for cancellation. Improve the largest evidenced bottleneck each cycle.
 
 Advertising requires the user's approval of the channel, creative, destination and spending cap before launch. No approval has been requested yet because the sales funnel is not ready.

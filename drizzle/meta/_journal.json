@@ -43,6 +43,13 @@
       "when": 1794177925245,
       "tag": "0005_abnormal_khan",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1794178456188,
+      "tag": "0006_round_eddie_brock",
+      "breakpoints": true
     }
   ]
 }

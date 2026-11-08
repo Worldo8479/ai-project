@@ -1,0 +1,1 @@
+ALTER TABLE `billing_subscription_state` ADD `price_id` text;

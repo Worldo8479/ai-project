@@ -28,7 +28,7 @@ function setup(t){
    return handler(new Request('https://private.example/webhook',{method:change.method??'POST',headers:{'stripe-signature':signature,...change.headers},...(change.method==='GET'?{}:{body:change.body??payload})}));
  };
  const subscription=(customer='cus_alice',status='active')=>({id:'sub_'+customer,customer,status,livemode:false,items:{data:[{price:{id:priceId},quantity:1,current_period_end:Math.floor(clock.time/1000)+3600}]}});
- const read=(userId='alice',sandbox=scope)=>readSandboxSubscriptionState({db,scope:sandbox,userId,now:()=>clock.time});
+ const read=(userId='alice',sandbox=scope)=>readSandboxSubscriptionState({db,scope:sandbox,priceId,userId,now:()=>clock.time});
  return {sqlite,db,clock,state,gateway,options,handler,event,send,subscription,read,bind};
 }
 
