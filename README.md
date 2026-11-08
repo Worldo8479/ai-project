@@ -20,6 +20,7 @@ Open the local URL printed by the dev server. This app now uses a Cloudflare Wor
 - Editable clients, fees, delivered hours, hourly delivery costs, and other direct costs.
 - Delivery profit and weighted portfolio margin, user-selected target, and fee/hour planning scenarios.
 - CSV import with validation, CSV export with spreadsheet formula escaping.
+- Working-review archive export and one-month import from Mac documents or web account exports, with preview and stale-version protection. See `docs/review-transfer.md`; this is manual transfer, not automatic Mac sync.
 - Responsive layout and printable review. Optional sign-in, account-scoped saved monthly reviews, and comparisons. Unsaved edits stay in the current tab; saved records are stored in the database. No analytics.
 
 The illustrative client data is fictional. Currency selection changes labels, not values. Figures are delivery profit, not company net profit. Other costs, overhead, tax and customer acquisition must be considered separately. Export before closing the tab. CSV contains monthly client totals only; it does not preserve currency, target or month metadata.
