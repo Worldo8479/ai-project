@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "architecture": "arm64",
+  "minimum_macos": "14.0",
+  "channel": "developer-preview",
+  "filename": "RetainerLens-0.1.0-arm64-preview.pkg",
+  "bytes": 183321,
+  "sha256": "6d349724aaba3b3416dd602c2259dfb971e594881c5e977436a8d05757b40d60",
+  "developer_id_signed": false,
+  "notarized": false
+}

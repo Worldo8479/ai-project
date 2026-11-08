@@ -24,8 +24,12 @@ jobs:
         run: swift test
       - name: Build local Mac preview
         run: bash scripts/build-mac.sh
+      - name: Package Mac installer
+        run: bash scripts/package-mac.sh
       - uses: actions/upload-artifact@v4
         with:
           name: RetainerLens-mac-preview
-          path: work/mac-release/*.zip
+          path: |
+            work/mac-release/*.zip
+            work/mac-release/*.pkg
           retention-days: 7

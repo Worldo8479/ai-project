@@ -2,6 +2,8 @@
 
 Automatic account sync is not connected in the Mac preview. The two apps now use the same local archive format for manual transfer.
 
+Browser acceptance confirmed archive selection, summary, loading, and stale-save rejection after refreshing history. The root website is now product information; sign-in opens the separate `/app` workspace. All saved-record operations still enforce the server-authenticated owner.
+
 1. On the web, load a saved month before editing. Choose **Export review** to download the current working month as a `.retainerlens` document, including month, currency, target and the saved version it came from. **Export account** still downloads all saved reviews and Trash as JSON.
 2. Open the document in the Mac preview using File → Open. Edit and save locally. Native file-dialog acceptance remains a verification gap; the shared-format model tests pass.
 3. On the web, choose **Open review archive**, select the Mac document or account JSON export, and choose a month. The dialog shows client count, fees, delivery profit and target before loading. No account records change at this step.

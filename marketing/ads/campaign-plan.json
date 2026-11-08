@@ -1,0 +1,98 @@
+{
+  "status": "draft_only",
+  "platform": "Google Search Ads",
+  "campaign_name": "RetainerLens | Search validation | DRAFT",
+  "budget_approved": false,
+  "proposed_total_budget_usd": 70,
+  "duration_days": 7,
+  "start_date": null,
+  "end_date": null,
+  "budget_type": "campaign_total_budget",
+  "target_geography": "United States",
+  "location_option": "Presence only",
+  "language": "English",
+  "network": "Google Search only",
+  "bid_strategy": "Maximize clicks",
+  "proposed_max_cpc_usd": 1.5,
+  "keywords": [
+    "retainer profitability software",
+    "agency profitability tool",
+    "client profitability software",
+    "retainer margin calculator",
+    "agency retainer management"
+  ],
+  "match_type": "Exact initially",
+  "negative_keywords": [
+    "jobs",
+    "salary",
+    "dental",
+    "orthodontic",
+    "lawyer",
+    "legal retainer",
+    "definition",
+    "course"
+  ],
+  "ads": [
+    {
+      "name": "Margin review",
+      "headlines": [
+        "Retainer Profitability Review",
+        "Know Your Delivery Margin",
+        "RetainerLens For Agencies",
+        "Fees, Hours And Costs",
+        "Make Month-End Clearer",
+        "Save Reviews To Your Account",
+        "Plan Your Next Fee Review",
+        "A Clearer Client Ledger"
+      ],
+      "descriptions": [
+        "Review client fees, hours and delivery costs. See which retainers meet your target.",
+        "Save monthly reviews to your account and compare delivery margins over time.",
+        "Model a fee or hours budget before your next retainer conversation."
+      ]
+    },
+    {
+      "name": "Fee conversation",
+      "headlines": [
+        "Is Your Retainer Underpriced?",
+        "See The Cost Behind The Fee",
+        "Plan Your Retainer Review",
+        "For Small Agency Owners",
+        "Turn Hours Into A Clear Review",
+        "Keep Your Monthly History",
+        "Private Account Workspace",
+        "Review Fees With RetainerLens"
+      ],
+      "descriptions": [
+        "Busy clients can still have thin margins. Review the cost behind each monthly fee.",
+        "Bring fees, hours and costs together. Save the review in your own account.",
+        "Explore the fee or hours budget needed for your target delivery margin."
+      ]
+    }
+  ],
+  "launch_dependencies": [
+    "Explicit owner approval of campaign, dates and spending limit",
+    "Public landing-page access approved by owner",
+    "Working subscription checkout and verified conversion measurement",
+    "Google Ads account setup and advertiser verification as required",
+    "Final destination and claims reviewed"
+  ],
+  "measurement": {
+    "primary": "Paid subscription, verified server-side",
+    "secondary": "First saved review from a new account",
+    "diagnostic": "Qualified search clicks; exclude owner and automated tests"
+  },
+  "decision_rule": "Review search relevance and activation after the first 20 qualified clicks or end date. Do not raise the budget automatically. This small test does not establish statistical significance.",
+  "economics": "Revenue and profit remain zero. Ad spend must be included in net profit; clicks or signups alone do not meet the business goal.",
+  "notes": [
+    "No account has been connected and no campaign has been created in Google Ads.",
+    "The CSV contains paused ad rows for a campaign to be configured later; it is not a complete campaign creation file.",
+    "Set the total budget directly in the account before launch. Do not replace it with an average daily budget without new approval.",
+    "No automatic text generation, expansion to other networks or retargeting is included in this proposal."
+  ],
+  "sources": [
+    "https://support.google.com/google-ads/answer/10486938/about-campaign-total-budgets",
+    "https://support.google.com/google-ads/answer/7684791",
+    "https://support.google.com/google-ads/editor/answer/57747"
+  ]
+}

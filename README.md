@@ -21,7 +21,8 @@ Open the local URL printed by the dev server. This app now uses a Cloudflare Wor
 - Delivery profit and weighted portfolio margin, user-selected target, and fee/hour planning scenarios.
 - CSV import with validation, CSV export with spreadsheet formula escaping.
 - Working-review archive export and one-month import from Mac documents or web account exports, with preview and stale-version protection. See `docs/review-transfer.md`; this is manual transfer, not automatic Mac sync.
-- Responsive layout and printable review. Optional sign-in, account-scoped saved monthly reviews, and comparisons. Unsaved edits stay in the current tab; saved records are stored in the database. No analytics.
+- Product information and a real software screenshot on `/`; the interactive workspace lives at `/app` and requires account sign-in. New accounts start empty, and existing accounts load their latest saved review. No interactive demo or example-data loader is offered on the website.
+- Responsive layout and printable review, account-scoped saved monthly reviews, and comparisons. Unsaved edits stay in the current tab; saved records are stored in the database. No analytics.
 
 The illustrative client data is fictional. Currency selection changes labels, not values. Figures are delivery profit, not company net profit. Other costs, overhead, tax and customer acquisition must be considered separately. Export before closing the tab. CSV contains monthly client totals only; it does not preserve currency, target or month metadata.
 
@@ -34,6 +35,10 @@ Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . T
 Required final scope: a full account-based web app and a Mac app sharing account data and subscription access. See `docs/roadmap.md` for delivery requirements.
 
 The `mac/` directory now contains a native SwiftUI document preview, shared-format archive handling, web calculation fixtures and eight native tests. It builds and launches, but shared account login/sync, billing access and desktop UI acceptance are not complete. See `mac/README.md` for build instructions and current limitations.
+
+The website includes an Apple Silicon `.pkg` download in `public/downloads/`, with version metadata and a SHA-256 checksum. It is an unsigned, unnotarized developer installer for macOS 14+, containing the current local-document Mac preview. It does not claim account sync is finished. The screenshot in `public/images/` uses only fictional client data.
+
+Two Google Search ad drafts, paused import CSVs and a proposed campaign specification are in `marketing/ads/`. The owner requested drafts first because no advertising account is set up. No campaign has been created on an advertising platform, no launch or budget is approved, and no money has been spent. The proposal is a $70 total-budget, seven-day test after launch and billing are ready.
 
 See `docs/business.md` for research, economics and validation milestones; `docs/design.md` for the visual approach and QA evidence.
 

@@ -13,7 +13,9 @@ swift test
 swift run RetainerLens
 ```
 
-From the repository root, `bash scripts/build-mac.sh` builds a release executable and `.app` bundle in `work/mac-release/`, with an architecture-specific ZIP. The script uses ad-hoc signing for local testing. It does not request or use a Developer ID identity and does not notarize the app. No binary or customer documents are committed to the public repository.
+From the repository root, `bash scripts/build-mac.sh` builds a release executable and `.app` bundle in `work/mac-release/`, with an architecture-specific ZIP. The script uses ad-hoc signing for local testing. It does not request or use a Developer ID identity and does not notarize the app. App bundles, intermediate binaries and customer documents are excluded from the public repository.
+
+Run `bash scripts/package-mac.sh` after building to create an architecture-specific `.pkg`. It installs only `Applications/RetainerLens.app`, disables bundle relocation, requires macOS 14+, and includes no installation scripts or background services. The website's downloadable Apple Silicon preview package is intentionally tracked in `public/downloads/` at the owner's request, together with its hash and release metadata. App bundles, intermediate binaries and customer documents remain excluded. The installer is unsigned and unnotarized, so macOS may block installation; Developer ID signing and notarization remain required for customer distribution.
 
 ## Implemented document flow
 
