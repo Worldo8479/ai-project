@@ -50,3 +50,7 @@ See `docs/business.md` for research, economics and validation milestones; `docs/
 ## Publishing hygiene
 
 Keep customer data, billing exports, credentials, and environment files out of this public repository. Only fictional examples and aggregate non-sensitive business metrics belong here. Source visibility does not imply a redistribution license; no open-source license has been selected yet.
+
+## Remaining launch work
+
+See [the launch readiness audit](docs/launch-readiness.md) for verified scope and unresolved dependencies, and [the shared-account proposal](docs/shared-accounts-plan.md) for the proposed native-compatible account backend. The proposal has not been provisioned or connected.
