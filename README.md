@@ -28,7 +28,7 @@ The illustrative client data is fictional. Currency selection changes labels, no
 
 Canonical project repository: https://github.com/Worldo8479/ai-project (public). The owner created it for this project. All application source, tests, design notes, business plans and hosting configuration are maintained here. The hosting service uses a deployment mirror; GitHub remains the main project repository.
 
-Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . The owner requested keeping the site private. Account persistence has been implemented and locally verified; hosted verification is pending. Payment processing, customer acquisition and paid subscriptions are not live. No ad spend has been authorized. The $29/month plan is a pricing hypothesis, not an available purchase.
+Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . The owner requested keeping the site private. Account persistence has been deployed privately and hosted save/reload/comparison checks pass. Version-protected saves, reversible Trash and full account export are implemented on a development branch but are not yet deployed; browser acceptance checks remain. See the verification notes for exact coverage. Payment processing, customer acquisition and paid subscriptions are not live. No ad spend has been authorized. The $29/month plan is a pricing hypothesis, not an available purchase.
 
 Required final scope: a full account-based web app and a Mac app sharing account data and subscription access. See `docs/roadmap.md` for delivery requirements.
 
@@ -36,7 +36,7 @@ See `docs/business.md` for research, economics and validation milestones; `docs/
 
 ## Verification
 
-`npm test` covers financial formulas, zero revenue, invalid numbers, overflow, infeasible hour budgets, quoted CSV, duplicates, and formula escaping. Browser checks confirmed editing the sample Fieldwork fee from 1,800 to 3,360 produces a 50% margin. Desktop and 390px mobile layouts were visually reviewed; the financial table scrolls within its own container without widening the page.
+`npm test` runs 19 tests covering financial formulas, CSV, review validation, two-account data isolation, forged owner IDs, origin checks, stale-write rejection, reversible Trash and account export. API tests use the real migration SQL in an isolated SQLite database through a D1-compatible adapter. Browser checks confirmed editing the sample Fieldwork fee from 1,800 to 3,360 produces a 50% margin. Desktop and 390px mobile layouts were visually reviewed; the financial table scrolls within its own container without widening the page.
 
 ## Publishing hygiene
 

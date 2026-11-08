@@ -1,9 +1,6 @@
 import {getChatGPTUser} from '../../chatgpt-auth';
-import {getDb} from '../../../db';
-import {reviews} from '../../../db/schema';
-import {eq,desc} from 'drizzle-orm';
-import {validateReview} from '../../../lib/review.js';
+import {env} from 'cloudflare:workers';
+import {handleReviewRequest} from '../../../lib/review-service.js';
 export const dynamic='force-dynamic';
-const reply=(body:unknown,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store'}});
-export async function GET(){const user=await getChatGPTUser();if(!user)return reply({error:'Sign in to see saved reviews.'},401);try{const saved=await getDb().select().from(reviews).where(eq(reviews.userId,user.userId)).orderBy(desc(reviews.month)).limit(120);return reply({reviews:saved.map(({userId,data,...r})=>({...r,rows:JSON.parse(data)}))});}catch{return reply({error:'Saved reviews are temporarily unavailable. Your current review is unchanged.'},503);}}
-export async function POST(request:Request){const user=await getChatGPTUser();if(!user)return reply({error:'Sign in to save your review.'},401);if(request.headers.get('origin')!==new URL(request.url).origin)return reply({error:'This request must come from this site.'},403);if(!request.headers.get('content-type')?.startsWith('application/json'))return reply({error:'Send a JSON review.'},415);let review;try{const raw=await request.text();if(raw.length>250000)return reply({error:'Review is too large.'},413);review=validateReview(JSON.parse(raw));}catch(e){return reply({error:e instanceof Error?e.message:'Invalid review.'},400);}try{const value={userId:user.userId,month:review.month,currency:review.currency,target:review.target,data:JSON.stringify(review.rows),updatedAt:new Date().toISOString()};await getDb().insert(reviews).values(value).onConflictDoUpdate({target:[reviews.userId,reviews.month,reviews.currency],set:{target:value.target,data:value.data,updatedAt:value.updatedAt}});return reply({saved:true,updatedAt:value.updatedAt});}catch{return reply({error:'Could not save. Export your review and try again.'},503);}}
+async function handle(request:Request){const user=await getChatGPTUser();return handleReviewRequest(request,user?.userId??null,env.DB);}
+export {handle as GET,handle as POST,handle as DELETE,handle as PUT};
