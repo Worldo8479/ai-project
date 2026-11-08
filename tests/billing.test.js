@@ -15,7 +15,7 @@ function fixture(responses) {
     assert.ok(responses.length, 'unexpected provider request');
     const next=responses.shift();
     if(next instanceof Error)throw next;
-    return Response.json(next.body ?? next,{status:next.status ?? 200});
+    return Response.json(next.body ?? next,{status:typeof next.status === 'number' ? next.status : 200});
   });
   return {gateway,calls};
 }
@@ -30,7 +30,7 @@ test('billing defaults off and refuses live keys and untrusted return origins',(
 
 test('checkout uses a fixed monthly price, server customer, fixed return URL and retry key',async()=>{
   const {gateway,calls}=fixture([price,{data:[],has_more:false},{id:'cs_test_abc123',mode:'subscription',
-    customer:'cus_owner',livemode:false,url:'https://checkout.stripe.com/c/pay/cs_test_abc123'}]);
+    customer:'cus_owner',livemode:false,status:'open',expires_at:2000000000,url:'https://checkout.stripe.com/c/pay/cs_test_abc123'}]);
   const result=await gateway.checkout('cus_owner',key);
   assert.equal(result.id,'cs_test_abc123');
   const {options}=calls[2];
@@ -39,7 +39,7 @@ test('checkout uses a fixed monthly price, server customer, fixed return URL and
   assert.equal(options.body.get('mode'),'subscription');
   assert.equal(options.body.get('customer'),'cus_owner');
   assert.equal(options.body.get('line_items[0][price]'),'price_monthly');
-  assert.equal(options.body.get('success_url'),'https://retainerlens.example/#account');
+  assert.equal(options.body.get('success_url'),'https://retainerlens.example/app#account');
   assert.equal(options.redirect,'error');
 });
 
@@ -106,4 +106,17 @@ test('access requires the right customer and plan, valid period and active statu
   }
   assert.equal(subscriptionAccess([subscription],'cus_owner','price_other',now).status,'inactive');
   assert.equal(subscriptionAccess([subscription],'cus_owner','price_monthly',2100000000000).status,'inactive');
+});
+
+test('retrieving a checkout verifies account, session identity, mode and expiry',async()=>{
+  const session={id:'cs_test_saved',customer:'cus_owner',livemode:false,mode:'subscription',
+    status:'open',expires_at:2000000000,url:'https://checkout.stripe.com/c/pay/saved'};
+  for(const change of [{customer:'cus_other'},{id:'cs_test_other'},{mode:'payment'},
+    {livemode:true},{status:'invented'},{expires_at:null},{url:'https://evil.example'}]){
+    const {gateway}=fixture([{...session,...change}]);
+    await assert.rejects(gateway.retrieveCheckout('cus_owner','cs_test_saved'));
+  }
+  const {gateway,calls}=fixture([{...session,status:'complete',url:null}]);
+  assert.equal((await gateway.retrieveCheckout('cus_owner','cs_test_saved')).url,null);
+  assert.equal(calls[0].options.method,'GET');
 });

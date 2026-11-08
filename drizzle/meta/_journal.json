@@ -15,6 +15,13 @@
       "when": 1794160086339,
       "tag": "0001_mature_mordo",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1794174268485,
+      "tag": "0002_lyrical_masked_marvel",
+      "breakpoints": true
     }
   ]
 }
