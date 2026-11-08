@@ -36,7 +36,7 @@ See `docs/business.md` for research, economics and validation milestones; `docs/
 
 ## Verification
 
-`npm test` runs 19 tests covering financial formulas, CSV, review validation, two-account data isolation, forged owner IDs, origin checks, stale-write rejection, reversible Trash and account export. API tests use the real migration SQL in an isolated SQLite database through a D1-compatible adapter. Browser checks confirmed editing the sample Fieldwork fee from 1,800 to 3,360 produces a 50% margin. Desktop and 390px mobile layouts were visually reviewed; the financial table scrolls within its own container without widening the page.
+`npm test` covers financial formulas, CSV, review validation, two-account data isolation, forged owner IDs, origin checks, stale-write rejection, reversible Trash and account export. API tests use the real migration SQL in an isolated SQLite database through a D1-compatible adapter. Sandbox billing contract tests use simulated Stripe responses; they do not prove live provider integration. See `docs/billing.md` for the remaining work. Browser checks confirmed editing the sample Fieldwork fee from 1,800 to 3,360 produces a 50% margin. Desktop and 390px mobile layouts were visually reviewed; the financial table scrolls within its own container without widening the page.
 
 ## Publishing hygiene
 
