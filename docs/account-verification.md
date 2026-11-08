@@ -12,6 +12,8 @@ Still required: a more complete account/settings UI, hosted billing lifecycle te
 
 Paid subscriptions, customer acquisition and profit are not yet achieved. Website access must remain private per the owner's instruction.
 
-## Unreleased account safeguards
+## Account safeguards acceptance
 
-The account safeguards are held on a development branch pending fresh browser acceptance testing. The last verified private deployment is unchanged. Nineteen tests pass and the Worker builds. The confirmation flow now uses an in-page dialog, and interface initialization is moved into a client effect to avoid DOM mutations before hydration. Browser interaction became unreliable after an earlier native confirmation prompt stalled; the new Trash/restore UI must be retested before merging and deployment. Do not treat the successful API/database tests as proof of the unverified UI.
+A fresh browser run verified opening the client editor, moving the sample review to Trash through the in-page confirmation, restoring it, saving a new revision, and downloading the full account JSON export. The downloaded file contained one active sample review, no trashed reviews, and month/currency/target/rows/revision metadata. No browser warning or error was captured in that run. The earlier browser interaction issue is resolved for this workflow.
+
+GitHub Actions run 42507353803 passed for the account-safeguards commit. Nineteen local tests and the production build pass. Further billing and Mac work remains separate and unfinished.

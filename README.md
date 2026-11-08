@@ -28,7 +28,7 @@ The illustrative client data is fictional. Currency selection changes labels, no
 
 Canonical project repository: https://github.com/Worldo8479/ai-project (public). The owner created it for this project. All application source, tests, design notes, business plans and hosting configuration are maintained here. The hosting service uses a deployment mirror; GitHub remains the main project repository.
 
-Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . The owner requested keeping the site private. Account persistence has been deployed privately and hosted save/reload/comparison checks pass. Version-protected saves, reversible Trash and full account export are implemented on a development branch but are not yet deployed; browser acceptance checks remain. See the verification notes for exact coverage. Payment processing, customer acquisition and paid subscriptions are not live. No ad spend has been authorized. The $29/month plan is a pricing hypothesis, not an available purchase.
+Private preview: https://retainerlens-studio.marco-anderson2011.chatgpt.site . The owner requested keeping the site private. Account persistence has been deployed privately and hosted save/reload/comparison checks pass. Version-protected saves, reversible Trash and full account export have passed local browser acceptance checks. See the verification notes for exact coverage. Payment processing, customer acquisition and paid subscriptions are not live. No ad spend has been authorized. The $29/month plan is a pricing hypothesis, not an available purchase.
 
 Required final scope: a full account-based web app and a Mac app sharing account data and subscription access. See `docs/roadmap.md` for delivery requirements.
 
