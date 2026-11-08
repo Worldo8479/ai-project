@@ -22,6 +22,7 @@ Open the local URL printed by the dev server. This app now uses a Cloudflare Wor
 - CSV import with validation, CSV export with spreadsheet formula escaping.
 - Working-review archive export and one-month import from Mac documents or web account exports, with preview and stale-version protection. See `docs/review-transfer.md`; this is manual transfer, not automatic Mac sync.
 - Product information and a real software screenshot on `/`; the interactive workspace lives at `/app` and requires account sign-in. New accounts start empty, and existing accounts load their latest saved review. No interactive demo or example-data loader is offered on the website.
+- Account settings show the signed-in identity and save version-protected default currency and margin preferences. Defaults apply to new reviews; current and saved reviews remain unchanged. Account exports include preferences.
 - Responsive layout and printable review, account-scoped saved monthly reviews, and comparisons. Unsaved edits stay in the current tab; saved records are stored in the database. No analytics.
 
 The illustrative client data is fictional. Currency selection changes labels, not values. Figures are delivery profit, not company net profit. Other costs, overhead, tax and customer acquisition must be considered separately. Export before closing the tab. CSV contains monthly client totals only; it does not preserve currency, target or month metadata.
@@ -44,7 +45,7 @@ See `docs/business.md` for research, economics and validation milestones; `docs/
 
 ## Verification
 
-`npm test` covers financial formulas, CSV, review validation, two-account data isolation, forged owner IDs, origin checks, stale-write rejection, reversible Trash and account export. API tests use the real migration SQL in an isolated SQLite database through a D1-compatible adapter. Sandbox billing tests cover durable account-to-customer binding, duplicate-click protection, checkout recovery and provider contracts with simulated Stripe responses. No payment route is enabled, and these tests do not prove live provider integration. See `docs/billing.md` for the remaining work. Browser checks confirmed editing the sample Fieldwork fee from 1,800 to 3,360 produces a 50% margin. Desktop and 390px mobile layouts were visually reviewed; the financial table scrolls within its own container without widening the page.
+`npm test` covers financial formulas, CSV, review validation, two-account data isolation, forged owner IDs, origin checks, stale-write rejection, reversible Trash and account export. API tests use the real migration SQL in an isolated SQLite database through a D1-compatible adapter. Sandbox billing tests cover durable account-to-customer binding, duplicate-click protection, checkout recovery and provider contracts with simulated Stripe responses. A separate Stripe test-environment run passed 14 API checks, including real provider session reuse, recovery and cancellation states. No payment route is enabled; full payment completion and renewals remain unverified. See `docs/billing.md` for the remaining work. Browser checks confirmed editing the sample Fieldwork fee from 1,800 to 3,360 produces a 50% margin. Desktop and 390px mobile layouts were visually reviewed; the financial table scrolls within its own container without widening the page.
 
 ## Publishing hygiene
 

@@ -1,0 +1,24 @@
+{
+  "runId": "a4224d5a-b56a-41ad-a7cf-53f6c698536d",
+  "startedAt": "2026-11-08T22:17:09.659Z",
+  "apiVersion": "2026-10-28.endive",
+  "checks": [
+    "Product is explicitly test mode",
+    "Stripe validates the exact USD 29 monthly plan",
+    "Concurrent checkout clicks create one local attempt",
+    "Open Checkout session is reused",
+    "Two app accounts have distinct Stripe customers",
+    "A different customer cannot retrieve the app checkout",
+    "Configured Stripe billing portal session is created",
+    "Provider-confirmed expiry permits a fresh checkout",
+    "Lost provider response is reported without claiming success",
+    "Restart resumes the same Stripe Checkout session with its persisted key",
+    "Provider trial state produces bounded sandbox access",
+    "An existing provider subscription prevents another checkout",
+    "Scheduled cancellation retains access only to the current period",
+    "Canceled provider subscription has no sandbox access"
+  ],
+  "cleanupErrors": 0,
+  "passed": true,
+  "finishedAt": "2026-11-08T22:17:24.756Z"
+}

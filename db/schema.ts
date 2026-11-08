@@ -24,3 +24,9 @@ export const billingCheckouts = sqliteTable('billing_checkouts', {
  state: text('state').notNull().default('pending'), expiresAt: integer('expires_at'),
 }, table => [uniqueIndex('billing_active_checkout').on(table.accountReference)
  .where(sql`${table.state} != 'expired'`)]);
+
+export const accountPreferences = sqliteTable('account_preferences', {
+ userId: text('user_id').primaryKey(), currency: text('currency').notNull(),
+ target: integer('target').notNull(), revision: text('revision').notNull(),
+ updatedAt: text('updated_at').notNull(),
+});

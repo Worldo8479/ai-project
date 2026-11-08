@@ -2,9 +2,9 @@
 
 The business model is one recurring studio subscription shared by the web and Mac apps. Proposed price: USD 29/month. No purchases, charges or paid entitlements are enabled.
 
-`lib/stripe-sandbox.js` is server-only, sandbox-only groundwork, with mocked contract tests. It is deliberately not imported by a public route or UI. It rejects live keys, validates the exact monthly price, creates hosted Checkout and portal sessions, uses stable retry keys, checks existing subscriptions across all pages, and describes sandbox access only from matching customer/price records and unexpired active/trial periods. Return origins and price IDs are server configuration, never client choices. Provider errors are redacted.
+`lib/stripe-sandbox.js` is server-only, sandbox-only groundwork, with unit contract tests and a separate provider acceptance runner. It is deliberately not imported by a public route or UI. It rejects live keys, validates the exact monthly price, creates hosted Checkout and portal sessions, uses stable retry keys, checks existing subscriptions across all pages, and describes sandbox access only from matching customer/price records and unexpired active/trial periods. Return origins and price IDs are server configuration, never client choices. Provider errors are redacted.
 
-These are simulated tests, not completed Stripe integration tests. No Stripe merchant account is connected. The site remains owner-private.
+Unit tests use simulated responses. A separate run against an actual claimable Stripe test environment passed 14 API checks on 8 November 2026; see the evidence below. No registered merchant account is connected and no real payments are enabled. The site remains owner-private.
 
 ## Durable sandbox coordination
 
@@ -18,9 +18,19 @@ Migration `0002_lyrical_masked_marvel.sql` adds billing tables without modifying
 
 Neither the coordinator nor its request adapter is mounted as an application route. No checkout button, paid entitlement or charge is enabled.
 
+## Provider acceptance evidence — 8 November 2026
+
+After explicit owner approval to share the connected GitHub email, Stripe CLI 1.55.8 created a claimable test environment. Its credentials and claim URL are excluded from this repository. It expires on 15 November 2026 unless claimed. The owner has a private local setup page with the original claim link; no browser automation was used.
+
+`scripts/verify-stripe-sandbox.mjs` accepts an explicitly test-mode key as JSON on stdin. It supports Stripe's `sk_test_` and claimable `rkcs_test_` keys, rejects live credentials, and never emits keys or hosted session URLs. Run it explicitly against an isolated sandbox; it is not part of ordinary unit tests or CI. The test script creates fictional provider records and then cleans them up. Stripe's initial default portal configuration is retained if applicable; it contains no customer records or live payment access.
+
+The recorded provider run passed 14 checks: the exact USD 29 monthly price, serialized/reused checkout, separate customer mapping, cross-customer rejection, configured portal creation, expired-session replacement, lost-response recovery using the same Stripe idempotency key, trial access, duplicate-subscription refusal, scheduled cancellation and immediate cancellation. `docs/stripe-sandbox-verification.json` contains the sanitized result. Test customers were deleted, sessions closed and test catalog entries archived. A test-only trial was used to exercise subscription state; this does not add a customer trial offer to the product.
+
+These checks do **not** prove hosted Checkout payment completion, payment collection, renewals/failures, webhook delivery, browser portal actions, production access enforcement or Mac billing. Those still require acceptance work. Computer control is disabled for this chat by the owner's request.
+
 ## Required before enabling even sandbox purchases
 
-- Connect and verify the intended Stripe sandbox, fixed plan and stable scope; complete real provider acceptance tests.
+- Claim the temporary test environment, configure the application sandbox and stable scope, and complete the remaining provider acceptance tests.
 - Implement verified webhook processing using raw bodies and Stripe's SDK. Persist event IDs, reconcile current provider state, handle retries and out-of-order events, and never grant access from a success-page redirect.
 - Configure a deliberate webhook delivery route. Owner-private hosting may block Stripe's unauthenticated server requests. Do not change the website audience or publish a separate endpoint without resolving this with the owner.
 - Add account billing controls and access enforcement. Preserve exports/read access when a subscription lapses. Decide and document grace periods, cancellations, refunds and retention.

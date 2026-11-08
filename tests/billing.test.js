@@ -21,7 +21,7 @@ function fixture(responses) {
 }
 
 test('billing defaults off and refuses live keys and untrusted return origins',()=>{
-  for(const change of [{mode:undefined},{mode:'live'},{secretKey:'sk_live_fake'},
+  for(const change of [{mode:undefined},{mode:'live'},{secretKey:'sk_live_fake'},{secretKey:'rkcs_live_fake'},{secretKey:'rkcs_unknown_fake'},
     {siteOrigin:'http://evil.example'},{siteOrigin:'https://user:pass@evil.example'},
     {siteOrigin:'https://retainerlens.example/?next=evil'}]){
     assert.throws(()=>createStripeSandboxGateway({...config,...change}));
@@ -119,4 +119,20 @@ test('retrieving a checkout verifies account, session identity, mode and expiry'
   const {gateway,calls}=fixture([{...session,status:'complete',url:null}]);
   assert.equal((await gateway.retrieveCheckout('cus_owner','cs_test_saved')).url,null);
   assert.equal(calls[0].options.method,'GET');
+});
+
+
+test('claimable test credentials are accepted while customer mode must be explicitly sandbox',async()=>{
+ const gateway=createStripeSandboxGateway({...config,secretKey:'rkcs_test_fixture'},async()=>Response.json({id:'cus_fixture',livemode:false}));
+ assert.equal(await gateway.createCustomer('opaque-account-123456',key),'cus_fixture');
+ const {gateway:missingMode}=fixture([{id:'cus_owner'}]);
+ await assert.rejects(missingMode.createCustomer('opaque-account-123456',key),/sandbox customer/);
+});
+
+
+test('a configured portal must use the server-selected configuration',async()=>{
+ const calls=[];const gateway=createStripeSandboxGateway({...config,portalConfigurationId:'bpc_fixed'},async(url,options)=>{calls.push(options);return Response.json({customer:'cus_owner',livemode:false,configuration:'bpc_fixed',url:'https://billing.stripe.com/session'});});
+ await gateway.portal('cus_owner',key);assert.equal(calls[0].body.get('configuration'),'bpc_fixed');
+ const wrong=createStripeSandboxGateway({...config,portalConfigurationId:'bpc_fixed'},async()=>Response.json({customer:'cus_owner',livemode:false,configuration:'bpc_other',url:'https://billing.stripe.com/session'}));
+ await assert.rejects(wrong.portal('cus_owner',key));
 });
